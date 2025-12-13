@@ -5,6 +5,7 @@ from IPython.display import display, clear_output, HTML
 from time import sleep
 from collections.abc import Callable
 from pathlib import Path
+from base64 import b64encode
 
 
 async def print_crash(long_task: Awaitable):
@@ -37,12 +38,16 @@ def display_images(dir_path: str, per_row: int = 3, width: int = 250):
     dir_path = Path(dir_path)
     images = list(dir_path.rglob("*.jpeg"))
 
-    html = '<div style="display:flex; flex-direction:column; gap:10px;">'
+    html = ""
     for i in range(0, len(images), per_row):
         html += '<div style="display:flex; gap:10px;">'
-        for img_path in images[i:i+per_row]:
-            html += f'<img src="{img_path}" width="{width}">'
-        html += '</div>'
-    html += '</div>'
+        for image in images[i : i + per_row]:
+            html += f"""
+            <img
+                src="data:image/jpeg;base64,{b64encode(image.read_bytes()).decode("ascii")}"
+                style="width:{width}px; height:auto; margin-bottom:10px;"
+            >
+            """
+        html += "</div>"
 
     display(HTML(html))
