@@ -16,10 +16,14 @@
         "/bin/python3",
         "/usr/bin/python3",
     ],
+    // "jupyter.notebookFileRoot": "${fileDirname}/..",
+    "jupyter.notebookFileRoot": "${workspaceFolder}",
+    // "jupyter.notebookFileRoot": "/workspaces/orcapod-demo",
     "notebook.formatOnSave.enabled": true,
     "notebook.output.scrolling": true,
     "python.defaultInterpreterPath": "~/.local/share/base/bin/python3",
     "python.terminal.activateEnvironment": false,
+    "python.terminal.shellIntegration.enabled": false,
     "workbench.panel.defaultLocation": "right",
     "workbench.secondarySideBar.defaultVisibility": "hidden"
 }
